@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Samarqand Choyxonasi — Milliy Taomlar & Ekotizim</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress"></div>
+
+  <!-- Season Particles Canvas -->
+  <canvas id="season-canvas"></canvas>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="tea-steam">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="piyola-loader">🍵</div>
+    <p id="preloader-text">Samarqand Choyxonasi ochilmoqda...</p>
+  </div>
+
+  <!-- Top Utility & Proverb Ticker -->
+  <div class="top-ticker">
+    <span id="proverb-text">«Choy — ko‘ngil ochqichi, suhbat — dil ravshani»</span>
+    <div class="live-status">
+      <span class="dot-green"></span> Ochiq (08:00 – 00:00) | 🚗 Parkovka: <strong id="parking-spots">14</strong> bo‘sh joy | ☀️ <span id="weather-temp">+24°C</span>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="logo">
+        <span class="logo-icon">🕌</span>
+        <div>
+          <strong>SAMARQAND</strong>
+          <small>CHOYXONASI</small>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#menu" data-i18n="nav_menu">Menyu</a>
+        <a href="#combo" data-i18n="nav_combo">Kombo & Choy</a>
+        <a href="#tapchan" data-i18n="nav_tapchan">Tapchan & Banket</a>
+        <a href="#interactive-hub" data-i18n="nav_hub">Interaktiv</a>
+        <a href="#gallery" data-i18n="nav_gallery">Galereya</a>
+      </nav>
+
+      <div class="nav-actions">
+        <select id="lang-switch" class="pill-btn" title="Tilni tanlash">
+          <option value="uz">O‘Z</option>
+          <option value="ru">RU</option>
+          <option value="en">EN</option>
+        </select>
+
+        <select id="season-switch" class="pill-btn" title="Mavsumiy effekt">
+          <option value="none">✨ Oddiy</option>
+          <option value="spring">🌸 Navro‘z</option>
+          <option value="summer">💧 Favvora</option>
+          <option value="autumn">🍂 Xazon</option>
+          <option value="winter">❄️ Qish</option>
+        </select>
+
+        <button id="sound-toggle" class="icon-btn" title="Choyxona ovozi">🔇</button>
+        <button id="theme-toggle" class="icon-btn" title="Tun / Yorug‘ rejim">🌙</button>
+        <button id="auth-btn" class="pill-btn gold-outline">👤 Kirish</button>
+        <button id="cart-open-btn" class="pill-btn primary-btn">
+          🛒 <span id="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-bg-pattern" id="parallax-pattern"></div>
+    <div class="container hero-grid">
+      <div class="hero-content reveal">
+        <span class="badge-gold">★ 100% HALOL SERTIFIKATLANGAN MILLIY OSHXONA</span>
+        <h1 data-i18n="hero_title">Sharqona Me’morchilik va Haqiqiy Samarqand Ta’mi</h1>
+        <p data-i18n="hero_desc">Zira va devzira guruchidan damlangan haqiqiy Samarqand oshi, ko‘mirda pishgan kaboblar va samovar choylaridan bahramand bo‘ling.</p>
+        <div class="hero-cta">
+          <a href="#menu" class="btn-lg primary-btn" data-i18n="btn_order">Buyurtma berish</a>
+          <a href="#tapchan" class="btn-lg glass-btn" data-i18n="btn_book">Tapchan bron qilish</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-box"><strong class="counter" data-target="15">0</strong>+<span>Yillik tajriba</span></div>
+          <div class="stat-box"><strong class="counter" data-target="65">0</strong>+<span>Milliy & Yengil taom</span></div>
+          <div class="stat-box"><strong class="counter" data-target="50000">0</strong>+<span>Mamnun mehmon</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal">
+        <div class="hero-card-stack">
+          <img src="https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?auto=format&fit=crop&w=900&q=80" alt="Samarqand Oshi" class="main-dish-img" />
+          <div class="floating-deal">
+            <span>🔥 KUN TAOMI (-20%)</span>
+            <strong>Samarqand Zig‘ir Oshi</strong>
+            <small>Tayyor bo‘lishi: 15 daq</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Ecosystem Hub -->
+  <section id="interactive-hub" class="section hub-section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Choyxona Aqlli Ekotizimi</h2>
+        <p>O‘yinlar, 360° virtual sayohat, QR-ofitsiant va boshqaruv markazi</p>
+      </div>
+      <div class="hub-grid">
+        <button class="hub-card" onclick="openModal('wheel-modal')">
+          <span class="hub-emoji">🎡</span>
+          <h3>Omad Barabani</h3>
+          <p>Bepul choy, somsa yoki 15% chegirma yuting</p>
+        </button>
+        <button class="hub-card" onclick="openModal('pano-modal')">
+          <span class="hub-emoji">🌐</span>
+          <h3>360° Virtual Sayohat</h3>
+          <p>Hovli, favvora va VIP xonalarni aylantirib ko‘ring</p>
+        </button>
+        <button class="hub-card" onclick="openModal('waiter-modal')">
+          <span class="hub-emoji">🔔</span>
+          <h3>QR-Ofitsiant Chaqirish</h3>
+          <p>Stoldan turmasdan choy yoki hisob chaqiring</p>
+        </button>
+        <button class="hub-card" onclick="openModal('gift-modal')">
+          <span class="hub-emoji">🎁</span>
+          <h3>Sovg‘a Sertifikati</h3>
+          <p>Yaqinlaringizga 100k–500k elektron karta sovg‘a qiling</p>
+        </button>
+        <button class="hub-card" onclick="openModal('admin-modal')">
+          <span class="hub-emoji">⚙️</span>
+          <h3>Admin-Panel</h3>
+          <p>Yangi taom qo‘shish va buyurtmalarni boshqarish</p>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu Section -->
+  <section id="menu" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Milliy va Yengil Taomlar Menyusi</h2>
+        <p>Har bir taomning kaloriyasi, tayyorlanish vaqti va portsiyasini tanlang</p>
+      </div>
+
+      <!-- Search, Voice Search & Diet Filters -->
+      <div class="menu-controls">
+        <div class="search-box">
+          <input type="text" id="menu-search" placeholder="Taom nomini yozing (masalan: Osh, Achichuk, Manti)..." />
+          <button id="voice-search-btn" title="Ovozli qidiruv">🎙️</button>
+        </div>
+
+        <div class="filter-pills" id="category-filters">
+          <button class="filter-btn active" data-cat="all">Barchasi</button>
+          <button class="filter-btn" data-cat="milliy">🍛 Milliy taomlar</button>
+          <button class="filter-btn" data-cat="yengil">🥗 Yengil taomlar</button>
+          <button class="filter-btn" data-cat="kabob">🍢 Kabob & Tandir</button>
+          <button class="filter-btn" data-cat="choy">🫖 Choy & Shirinlik</button>
+        </div>
+
+        <div class="diet-pills">
+          <label><input type="checkbox" id="filter-veg" /> 🌱 Vegetarian</label>
+          <label><input type="checkbox" id="filter-nospicy" /> 🥛 Achchiq emas</label>
+          <button id="compare-open-btn" class="pill-btn">⚖️ Taqqoslash (<span id="compare-count">0</span>/2)</button>
+        </div>
+      </div>
+
+      <div id="menu-grid" class="menu-grid"></div>
+    </div>
+  </section>
+
+  <!-- Combo & Tea Builder Section -->
+  <section id="combo" class="section alt-bg">
+    <div class="container two-col-grid">
+      <!-- Samovar Tea Constructor -->
+      <div class="glass-panel">
+        <h3>🫖 Samovar Choy Konstruktori</h3>
+        <p>O‘zingizga xos shifobaxsh choy damlamasini yarating:</p>
+        <div class="builder-group">
+          <label>1. Choy asosini tanlang:</label>
+          <select id="tea-base" class="form-input">
+            <option value="Ko‘k choy (95-nav)|12000">Ko‘k choy (95-nav) — 12 000 so‘m</option>
+            <option value="Qora choy (Ceylon)|12000">Qora choy (Ceylon) — 12 000 so‘m</option>
+            <option value="Kiyik o‘ti damlamasi|18000">Tog‘ kiyik o‘ti — 18 000 so‘m</option>
+          </select>
+        </div>
+        <div class="builder-group">
+          <label>2. Qo‘shimcha giyoh va mevalar:</label>
+          <div class="checkbox-grid">
+            <label><input type="checkbox" class="tea-addon" value="Limon (3000)" data-price="3000"> 🍋 Limon (+3 000)</label>
+            <label><input type="checkbox" class="tea-addon" value="Novvot (5000)" data-price="5000"> 💎 Samarqand novvoti (+5 000)</label>
+            <label><input type="checkbox" class="tea-addon" value="Yalpiz (3000)" data-price="3000"> 🌿 Yangi yalpiz (+3 000)</label>
+            <label><input type="checkbox" class="tea-addon" value="Asal (6000)" data-price="6000"> 🍯 Tog‘ asali (+6 000)</label>
+          </div>
+        </div>
+        <button id="add-custom-tea" class="primary-btn full-btn">Savatga maxsus choy qo‘shish</button>
+      </div>
+
+      <!-- Combo Sets -->
+      <div class="glass-panel">
+        <h3>🍱 Tayyor Kombo-To‘plamlar (-15% tejamkor)</h3>
+        <div class="combo-list">
+          <div class="combo-item">
+            <div>
+              <strong>«Do‘stlar Davrasi» (4 kishilik)</strong>
+              <p>1 kg Samarqand oshi, 2 ta Achichuk, 4 ta Issiq non, 1 choynak Novvotli ko‘k choy</p>
+              <span class="price-tag">185 000 so‘m</span>
+            </div>
+            <button class="pill-btn primary-btn" onclick="addCombo('Do‘stlar Davrasi Kombosi', 185000)">+ Savatga</button>
+          </div>
+          <div class="combo-item">
+            <div>
+              <strong>«Yengil Parhez Seti» (2 kishilik)</strong>
+              <p>2 ta Mastava, Gril sabzavotlari, Suzma assorti, Kiyik o‘ti choyi</p>
+              <span class="price-tag">98 000 so‘m</span>
+            </div>
+            <button class="pill-btn primary-btn" onclick="addCombo('Yengil Parhez Seti', 98000)">+ Savatga</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tapchan Map & Banquet Calculator -->
+  <section id="tapchan" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Tapchan Xaritasi va Banket Kalkulyatori</h2>
+        <p>Hovlidagi bo‘sh tapchanlardan birini tanlang yoki tadbir xarajatini hisoblang</p>
+      </div>
+
+      <div class="two-col-grid">
+        <div class="glass-panel">
+          <h3>🗺️ Jonli Tapchan Xaritasi</h3>
+          <div class="map-legend">
+            <span><i class="dot free"></i> Bo‘sh</span>
+            <span><i class="dot busy"></i> Band</span>
+            <span><i class="dot selected"></i> Tanlangan</span>
+          </div>
+          <div class="tapchan-grid" id="tapchan-grid"></div>
+          <form id="booking-form" class="booking-form">
+            <input type="text" id="book-name" class="form-input" placeholder="Ismingiz" required />
+            <input type="tel" id="book-phone" class="form-input" placeholder="+998 90 123 45 67" required />
+            <input type="datetime-local" id="book-time" class="form-input" required />
+            <button type="submit" class="primary-btn full-btn">Tapchanni Band Qilish</button>
+          </form>
+        </div>
+
+        <div class="glass-panel">
+          <h3>🎉 Banket & Iftorlik Kalkulyatori</h3>
+          <label>Mehmonlar soni: <strong id="guest-count-val">15</strong> kishi</label>
+          <input type="range" id="guest-slider" min="5" max="100" value="15" class="slider" />
+
+          <label>Menyu darajasi:</label>
+          <select id="banquet-tier" class="form-input">
+            <option value="85000">Standart Milliy (85 000 so‘m / kishi)</option>
+            <option value="135000">Premium To‘yona (135 000 so‘m / kishi)</option>
+            <option value="190000">VIP Shohona (190 000 so‘m / kishi)</option>
+          </select>
+
+          <div class="checkbox-grid" style="margin:12px 0;">
+            <label><input type="checkbox" id="banquet-music" value="400000"> 🎶 Jonli dutor va rubob (+400 000)</label>
+            <label><input type="checkbox" id="banquet-decor" value="300000"> 🌸 Bayramona bezak (+300 000)</label>
+          </div>
+
+          <div class="banquet-total">
+            <span>Taxminiy umumiy summa:</span>
+            <strong id="banquet-total-price">1 275 000 so‘m</strong>
+          </div>
+          <button class="pill-btn primary-btn full-btn" onclick="showToast('Banket so‘rovingiz menejerga yuborildi!')">Buyurtma qoldirish</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery & Chef Blog -->
+  <section id="gallery" class="section alt-bg">
+    <div class="container">
+      <div class="section-head">
+        <h2>Choyxona Muhiti va Oshpaz Sirlari</h2>
+      </div>
+      <div class="gallery-grid">
+        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80" alt="Choyxona zali" onclick="openLightbox(this.src)" />
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80" alt="Qozon kabob" onclick="openLightbox(this.src)" />
+        <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=600&q=80" alt="Manti" onclick="openLightbox(this.src)" />
+        <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=600&q=80" alt="Ko‘k choy" onclick="openLightbox(this.src)" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Cart Drawer & Checkout Modal -->
+  <aside id="cart-drawer" class="drawer">
+    <div class="drawer-header">
+      <h3>🛒 Buyurtma Savati</h3>
+      <button onclick="toggleCart(false)" class="icon-btn">✕</button>
+    </div>
+
+    <div class="free-delivery-bar">
+      <small id="delivery-progress-text">Bepul yetkazib berish uchun yana 100 000 so‘m qoldi</small>
+      <div class="progress-track"><div id="delivery-progress-fill"></div></div>
+    </div>
+
+    <div id="cart-items" class="cart-items"></div>
+
+    <div class="cart-extras">
+      <div class="promo-row">
+        <input type="text" id="promo-input" placeholder="Promokod (NAVRUZ20)" class="form-input" />
+        <button onclick="applyPromo()" class="pill-btn">Qo‘llash</button>
+      </div>
+
+      <div class="split-bill-row">
+        <label>👥 Hisobni bo‘lish (<span id="split-count">1</span> kishi):</label>
+        <input type="range" id="split-slider" min="1" max="10" value="1" />
+        <small>Har bir kishiga: <strong id="per-person-price">0 so‘m</strong></small>
+      </div>
+
+      <div class="tips-row">
+        <span>Choychaqa (Tips):</span>
+        <button class="tip-btn active" data-tip="0">0%</button>
+        <button class="tip-btn" data-tip="0.05">5%</button>
+        <button class="tip-btn" data-tip="0.10">10%</button>
+      </div>
+    </div>
+
+    <div class="drawer-footer">
+      <div class="total-line"><span>Jami to‘lov:</span><strong id="cart-total">0 so‘m</strong></div>
+      <button onclick="openCheckout()" class="primary-btn full-btn">Rasmiylashtirish va To‘lash →</button>
+    </div>
+  </aside>
+
+  <!-- Checkout & 3D Card Modal -->
+  <div id="checkout-modal" class="modal">
+    <div class="modal-box wide-modal">
+      <div class="modal-head">
+        <h3>💳 Buyurtmani Rasmiylashtirish</h3>
+        <button onclick="closeModal('checkout-modal')" class="icon-btn">✕</button>
+      </div>
+
+      <div class="checkout-grid">
+        <div>
+          <h4>1. Yetkazib berish xaritasi (Masofa hisobi)</h4>
+          <div id="delivery-map" class="mini-map" title="Manzilni belgilash uchun bosing">
+            <div class="map-center-pin">🕌 Choyxona</div>
+            <div id="user-map-pin" class="user-pin" style="top:65%;left:70%;">📍 Sizning uy</div>
+          </div>
+          <small>Xaritaga bosing: Masofa <strong id="map-distance">3.2 km</strong> | Yetkazish: <strong id="delivery-fee-display">10 000 so‘m</strong></small>
+
+          <h4 style="margin-top:14px;">2. To‘lov turini tanlang</h4>
+          <div class="pay-tabs">
+            <button class="pay-tab active" onclick="switchPayTab('card')">💳 Bank Kartasi (3D)</button>
+            <button class="pay-tab" onclick="switchPayTab('qr')">📱 Click / Payme QR</button>
+          </div>
+
+          <div id="pay-card-section">
+            <div class="card-3d-wrapper">
+              <div class="card-3d" id="credit-card-3d">
+                <div class="card-face card-front">
+                  <div class="card-top">
+                    <span id="card-brand">UZCARD</span>
+                    <span> contactless 📶</span>
+                  </div>
+                  <div class="card-num" id="card-num-display">8600 •••• •••• 4512</div>
+                  <div class="card-bottom">
+                    <div><small>EGASI</small><div id="card-holder-display">MEHMON</div></div>
+                    <div><small>MUDDATI</small><div id="card-exp-display">09/29</div></div>
+                  </div>
+                </div>
+                <div class="card-face card-back">
+                  <div class="mag-stripe"></div>
+                  <div class="cvv-box">CVV: <span id="card-cvv-display">***</span></div>
+                </div>
+              </div>
+            </div>
+
+            <input type="text" id="cc-number" maxlength="19" placeholder="Karta raqami (8600 / 9860 / 4242...)" class="form-input" />
+            <div class="two-inputs">
+              <input type="text" id="cc-holder" placeholder="Karta egasi ismi" class="form-input" />
+              <input type="text" id="cc-exp" maxlength="5" placeholder="MM/YY" class="form-input" />
+              <input type="password" id="cc-cvv" maxlength="3" placeholder="CVV" class="form-input" />
+            </div>
+          </div>
+
+          <div id="pay-qr-section" style="display:none; text-align:center; padding:16px;">
+            <div class="qr-box">
+              <svg viewBox="0 0 100 100" width="140" height="140">
+                <rect width="100" height="100" fill="#fff"/>
+                <path d="M10 10h25v25H10zm5 5v15h15V15zm50-5h25v25H65zm5 5v15h15V15zM10 65h25v25H10zm5 5v15h15V70zm30-55h10v10H45zm0 20h10v25H45zm20 15h25v10H65zm-20 25h15v15H45zm25 0h20v15H70z" fill="#0f2e24"/>
+              </svg>
+            </div>
+            <p>Click yoki Payme ilovasi orqali skanerlang</p>
+          </div>
+
+          <button onclick="completePayment()" class="primary-btn full-btn" style="margin-top:12px;">✅ To‘lovni Tasdiqlash va Chek Olish</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Auth Modal (SMS Verification) -->
+  <div id="auth-modal" class="modal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3>👤 Shaxsiy Kabinetga Kirish</h3>
+        <button onclick="closeModal('auth-modal')" class="icon-btn">✕</button>
+      </div>
+      <div id="auth-step-1">
+        <p>Ro‘yxatdan o‘ting va darhol <strong>25 000 so‘m</strong> keshbek bonus oling!</p>
+        <input type="text" id="user-fullname" placeholder="Ism-familiyangiz" class="form-input" />
+        <input type="tel" id="user-phone" placeholder="+998 90 123 45 67" class="form-input" />
+        <button onclick="sendSmsCode()" class="primary-btn full-btn">SMS Kod Yuborish</button>
+      </div>
+      <div id="auth-step-2" style="display:none;">
+        <p>Raqamingizga 4 xonali kod yuborildi (Sinov kodi: <strong>1234</strong>)</p>
+        <input type="text" id="sms-code-input" maxlength="4" placeholder="1234" class="form-input" />
+        <button onclick="verifySmsCode()" class="primary-btn full-btn">Tasdiqlash</button>
+      </div>
+      <div id="user-profile-view" style="display:none;">
+        <div class="loyalty-card">
+          <span class="tier-badge">🥇 OLTIN MEHMON MAQOMI</span>
+          <h4 id="profile-name">Mehmon</h4>
+          <p>Bonus balansi: <strong id="profile-bonus">25 000 so‘m</strong></p>
+        </div>
+        <h4>📜 Buyurtmalar tarixi</h4>
+        <div id="order-history-list"><small>Hozircha buyurtmalar yo‘q</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wheel of Fortune Modal -->
+  <div id="wheel-modal" class="modal">
+    <div class="modal-box" style="text-align:center;">
+      <div class="modal-head">
+        <h3>🎡 Omad Barabani</h3>
+        <button onclick="closeModal('wheel-modal')" class="icon-btn">✕</button>
+      </div>
+      <div class="wheel-container">
+        <div class="wheel-pointer">▼</div>
+        <div id="lucky-wheel" class="lucky-wheel"></div>
+      </div>
+      <button id="spin-btn" onclick="spinWheel()" class="primary-btn full-btn">Barabanni Aylantirish!</button>
+      <p id="wheel-result" style="margin-top:10px; font-weight:700;"></p>
+    </div>
+  </div>
+
+  <!-- 360 Virtual Tour Modal -->
+  <div id="pano-modal" class="modal">
+    <div class="modal-box wide-modal">
+      <div class="modal-head">
+        <h3>🌐 360° Choyxona Hovlisi Panoramasi</h3>
+        <button onclick="closeModal('pano-modal')" class="icon-btn">✕</button>
+      </div>
+      <p>Rasm ustida sichqonchani chapga va o‘ngga surib atrofni tomosha qiling:</p>
+      <div id="pano-viewer" class="pano-viewer"></div>
+    </div>
+  </div>
+
+  <!-- QR Waiter Modal -->
+  <div id="waiter-modal" class="modal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3>🔔 QR-Ofitsiant Chaqirish</h3>
+        <button onclick="closeModal('waiter-modal')" class="icon-btn">✕</button>
+      </div>
+      <label>Stol yoki Tapchan raqami:</label>
+      <select id="waiter-table" class="form-input">
+        <option>Tapchan №1 (Favvora yonida)</option>
+        <option>Tapchan №2 (Chinor ostida)</option>
+        <option>VIP Xona №1</option>
+        <option>Umumiy Zal — 5-stol</option>
+      </select>
+      <div class="waiter-actions">
+        <button class="pill-btn" onclick="callWaiter('Choy yangilash')">🫖 Choy yangilash</button>
+        <button class="pill-btn" onclick="callWaiter('Issiq non olib kelish')">🫓 Issiq non</button>
+        <button class="pill-btn" onclick="callWaiter('Hisobni olib kelish')">🧾 Hisobni olib kelish</button>
+        <button class="pill-btn" onclick="callWaiter('Ofitsiant yordami')">🙋‍♂️ Ofitsiantni chaqirish</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gift Card Modal -->
+  <div id="gift-modal" class="modal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3>🎁 Elektron Sovg‘a Sertifikati</h3>
+        <button onclick="closeModal('gift-modal')" class="icon-btn">✕</button>
+      </div>
+      <input type="text" id="gift-recipient" placeholder="Qabul qiluvchi ismi" class="form-input" />
+      <select id="gift-amount" class="form-input">
+        <option value="100000">100 000 so‘m — Kumush Sertifikat</option>
+        <option value="300000">300 000 so‘m — Oltin Sertifikat</option>
+        <option value="500000">500 000 so‘m — Shohona VIP Sertifikat</option>
+      </select>
+      <button onclick="buyGiftCard()" class="primary-btn full-btn">Savatga Sertifikat Qo‘shish</button>
+    </div>
+  </div>
+
+  <!-- Admin Panel Modal -->
+  <div id="admin-modal" class="modal">
+    <div class="modal-box wide-modal">
+      <div class="modal-head">
+        <h3>⚙️ Choyxona Admin-Paneli</h3>
+        <button onclick="closeModal('admin-modal')" class="icon-btn">✕</button>
+      </div>
+      <div class="two-col-grid">
+        <div>
+          <h4>+ Yangi Taom Qo‘shish</h4>
+          <input type="text" id="adm-title" placeholder="Taom nomi" class="form-input" />
+          <input type="number" id="adm-price" placeholder="Narxi (so‘m)" class="form-input" />
+          <select id="adm-cat" class="form-input">
+            <option value="milliy">Milliy taom</option>
+            <option value="yengil">Yengil taom</option>
+            <option value="kabob">Kabob</option>
+            <option value="choy">Choy & Shirinlik</option>
+          </select>
+          <button onclick="adminAddDish()" class="primary-btn full-btn">Menyuga Qo‘shish</button>
+        </div>
+        <div>
+          <h4>📊 Bugungi Statistika</h4>
+          <p>Jami buyurtmalar: <strong id="adm-orders-count">142 ta</strong></p>
+          <p>Kunlik tushum: <strong id="adm-revenue">18 450 000 so‘m</strong></p>
+          <p>Eng ko‘p sotilgan: <strong>Samarqand Zig‘ir Oshi</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dish Details / KBJU Modal -->
+  <div id="detail-modal" class="modal">
+    <div class="modal-box" id="detail-modal-body"></div>
+  </div>
+
+  <!-- Compare Modal -->
+  <div id="compare-modal" class="modal">
+    <div class="modal-box wide-modal">
+      <div class="modal-head">
+        <h3>⚖️ Taomlarni Taqqoslash</h3>
+        <button onclick="closeModal('compare-modal')" class="icon-btn">✕</button>
+      </div>
+      <div id="compare-body" class="two-col-grid"></div>
+    </div>
+  </div>
+
+  <!-- Receipt Modal -->
+  <div id="receipt-modal" class="modal">
+    <div class="modal-box" id="receipt-content" style="text-align:center;"></div>
+  </div>
+
+  <!-- Live Order Tracker Floating Widget -->
+  <div id="live-tracker" class="live-tracker" style="display:none;">
+    <div class="tracker-head">
+      <strong>🛵 Jonli Buyurtma Kuzatuvi</strong>
+      <button onclick="document.getElementById('live-tracker').style.display='none'">✕</button>
+    </div>
+    <p id="tracker-status">Oshpaz taomingizni tayyorlamoqda...</p>
+    <div class="progress-track"><div id="tracker-bar" style="width:25%"></div></div>
+  </div>
+
+  <!-- AI Choyxonachi Chat Widget -->
+  <div class="ai-widget">
+    <div id="ai-chat-box" class="ai-chat-box" style="display:none;">
+      <div class="ai-head">
+        <strong>👳‍♂️ AI-Choyxonachi</strong>
+        <button onclick="toggleAiChat()">✕</button>
+      </div>
+      <div id="ai-messages" class="ai-messages">
+        <div class="ai-msg bot">Assalomu alaykum! Necha kishisiz yoki qanday taom xohlaysiz? Maslahat beraman!</div>
+      </div>
+      <div class="ai-input-row">
+        <input type="text" id="ai-input" placeholder="Masalan: 4 kishiga nima tavsiya qilasiz?" />
+        <button onclick="sendAiMessage()">➤</button>
+      </div>
+    </div>
+    <button class="ai-fab" onclick="toggleAiChat()">👳‍♂️ AI Maslahat</button>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast"></div>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>🕌 SAMARQAND CHOYXONASI</h4>
+        <p>Manzil: Samarqand sh., Registon ko‘chasi, 14-uy</p>
+        <p>Telefon: +998 (66) 233-00-00</p>
+      </div>
+      <div>
+        <h4>Ish vaqti</h4>
+        <p>Har kuni: 08:00 dan 00:00 gacha</p>
+        <p>Jonli musiqa: Juma, Shanba, Yakshanba (19:00)</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
